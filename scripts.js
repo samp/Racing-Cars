@@ -1,6 +1,7 @@
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext("2d");
 let startbutton = document.getElementById('start');
+let sound = document.getElementById("sound");
 
 startbutton.addEventListener("click", start);
 
@@ -78,6 +79,7 @@ class Car {
     }
 }
 
+// Start game
 function run() {
     if (ctx) {
         createCars();
@@ -85,6 +87,7 @@ function run() {
     }
 }
 
+// Reset game
 function win(number) {
     alert("Car " + number + " won!");
     started = false;
@@ -92,10 +95,10 @@ function win(number) {
     createCars();
 };
 
+// Create car objects
 function createCars() {
     fetch("http://www.colr.org/json/colors/random/8", { cache: "no-cache" }).then(function (response) {
         response.json().then(function (json) {
-            console.log(json.colors[0].hex);
             while (cars.length < 4) {
                 let c = new Car({
                     y: cars.length * 100 + 200,
@@ -110,12 +113,13 @@ function createCars() {
     });
 }
 
+// Draw cars
 function drawCar() {
-    //fill screen with white
+    // Fill screen with white
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, width, height);
 
-    //draw each car and then move it
+    // Draw each car and then move it
     for (let i = 0; i < cars.length; i++) {
         cars[i].draw();
         if (started == true) {
@@ -126,12 +130,14 @@ function drawCar() {
 }
 
 function random(min, max) {
-    //return random value in range min - max
+    // Return random value in range min - max
     return num = Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// Trigger car movement
 function start() {
     started = true;
+    sound.play();
 }
 
 run();
