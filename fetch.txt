@@ -1,0 +1,5 @@
+fetch("https://www.colr.org/json/colors/random/8", { cache: "no-cache", cors: "no-cors" }).then(function (response) {
+        response.json().then(function (json) {
+            // code here
+        });
+    });

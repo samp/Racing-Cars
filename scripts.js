@@ -1,11 +1,9 @@
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext("2d");
 let startbutton = document.getElementById('start');
-let sound = document.getElementById("sound");
 
 startbutton.addEventListener("click", start);
 
-//width and height of screen -4 for the canvas border
 width = canvas.width;
 height = canvas.height;
 
@@ -97,7 +95,7 @@ function win(number) {
 
 // Create car objects
 function createCars() {
-    fetch("http://www.colr.org/json/colors/random/8", { cache: "no-cache" }).then(function (response) {
+    fetch("https://www.colr.org/json/colors/random/8", { cache: "no-cache", cors: "no-cors" }).then(function (response) {
         response.json().then(function (json) {
             while (cars.length < 4) {
                 let c = new Car({
@@ -137,7 +135,6 @@ function random(min, max) {
 // Trigger car movement
 function start() {
     started = true;
-    sound.play();
 }
 
 run();
